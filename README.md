@@ -6,7 +6,11 @@ Chariot is a aggregated package manager, currently supports npm, and bower.
 
 Place `chariot` in your `bin` folder of choice.
 
-**In OSX** `/usr/local/bin`
+**In OSX** 
+
+```
+/usr/local/bin
+```
 
 # Usage
 
