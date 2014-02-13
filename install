@@ -1,0 +1,12 @@
+#!/bin/bash
+
+BIN_PATH=/usr/bin/chariot
+
+if [ ! \( -e "$BIN_PATH" \) ]; then
+  ln -l ./chariot $BIN_PATH
+  echo "Chariot has been installed to $BIN_PATH."
+  exit 0
+else
+  echo "Chariot is already installed, unlink from $BIN_PATH and try again."
+  exit 0
+fi
