@@ -51,7 +51,7 @@ while test $# -gt 0; do
       if command_exists bower; then
         bower_module $@
       elif command_exists npm; then
-        npm install bower 2>/dev/null
+        npm install bower -g 2>/dev/null
         bower_module $@
       else
         error "npm has not been installed, please install npm to continue."
