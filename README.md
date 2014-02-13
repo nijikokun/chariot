@@ -4,28 +4,38 @@ Chariot is a aggregated package manager, currently supports npm, and bower.
 
 # Installation
 
+```bash
+$ ./install
+```
+
+You may be required to `chmod +x ./install` prior to running.
+
+### Alternative Method
+
+**Manually**
+
 Place `chariot` in your `bin` folder of choice.
 
-**In OSX** 
+**Symlink** 
 
-```
-/usr/local/bin
+```bash
+$ ln -s ./chariot /usr/bin/chariot
 ```
 
 # Usage
 
-```
+```bash
 $ chariot -h
 ```
 
 **Bower / Web Packages**
 
-```shell
+```bash
 $ chariot web -h
 ```
 
 **NPM / Node Packages**
 
-```shell
+```bash
 $ chariot node -h
 ```
