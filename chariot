@@ -19,12 +19,22 @@ bower_module () {
   exit 0
 }
 
+grunt_module () {
+  grunt ${@:2}
+  exit 0
+}
+
+info () {
+  echo "Info: $1"
+}
+
 error () {
   echo "Error: $1";
   exit 0
 }
 
 display_help () {
+  # General
   echo "$PROGRAM - package manager for both the web and node."
   echo " "
   echo "$PROGRAM [options] [arguments]"
@@ -32,8 +42,14 @@ display_help () {
   echo "options:"
   echo "-h, --help                show brief help"
   echo "-v, --version             show version"
-  echo "web                       web package manager, use -h after this option for more info"
-  echo "node                      node package manager, use -h after this option for more info"
+
+  # Package managers
+  echo "web, bower                web package manager, use -h after this option for more info"
+  echo "node, npm                 node package manager, use -h after this option for more info"
+
+  # Misc
+  echo "task, grunt               javascript task manager, use -h after this option for more info"
+
   exit 0
 }
 
@@ -47,21 +63,34 @@ while test $# -gt 0; do
     -v|--version)
       echo $VERSION
       ;;
-    web)
+    grunt)
+      if command_exists grunt; then
+        grunt_module $@
+      elif command_exists npm; then
+        info "Attempting to install grunt-cli, you may have to run under sudo."
+        npm install grunt-cli -g
+        info "Grunt has been installed, you may be required to update your PATH."
+        grunt_module $@
+      else
+        error "npm has not been installed, please install npm to continue. We suggest using NVM to manage node & npm. :)"
+      fi
+      ;;
+    web|bower)
       if command_exists bower; then
         bower_module $@
       elif command_exists npm; then
-        npm install bower -g 2>/dev/null
+        info "Attempting to install bower, you may have to run under sudo."
+        npm install bower -g
         bower_module $@
       else
-        error "npm has not been installed, please install npm to continue."
+        error "npm has not been installed, please install npm to continue. We suggest using NVM to manage node & npm. :)"
       fi
       ;;
-    node)
+    node|npm)
       if command_exists npm; then
         node_module $@
       else
-        error "npm has not been installed, please install npm to continue."
+        error "npm has not been installed, please install npm to continue. We suggest using NVM to manage node & npm. :)"
       fi
       ;;
     *)
